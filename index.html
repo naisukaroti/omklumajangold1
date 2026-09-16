@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full bg-[#FAF8F5]">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OMK St. Ignatius De Loyola - Paroki Maria Ratu Damai Lumajang</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts Inter & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        omk: {
+                            deep: '#1E3A2B',      // Forest Green
+                            medium: '#2D5A40',    // Emerald Green
+                            accent: '#D4AF37',    // Gold
+                            cream: '#F5F3E9',     // Soft Cream
+                            light: '#E8ECD7',     // Sage Tint
+                            dark: '#14241B',      // Dark Forest
+                            sand: '#EAE6D9'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .masonry-grid {
+            column-count: 1;
+            column-gap: 1.25rem;
+        }
+        @media (min-width: 640px) {
+            .masonry-grid { column-count: 2; }
+        }
+        @media (min-width: 1024px) {
+            .masonry-grid { column-count: 3; }
+        }
+        @media (min-width: 1280px) {
+            .masonry-grid { column-count: 4; }
+        }
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1.25rem;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F5F3E9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2D5A40;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #1E3A2B;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800 bg-[#FAF8F5] min-h-full flex flex-col selection:bg-omk-medium selection:text-white">
+
+    <header class="sticky top-0 z-40 bg-omk-deep/95 backdrop-blur-md text-white border-b border-omk-accent/30 shadow-lg transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo & Paroki Title -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="resetFilters()">
+                    <div class="relative w-12 h-12 rounded-full overflow-hidden border-2 border-omk-accent shadow-md bg-omk-cream flex items-center justify-center flex-shrink-0 group">
+                        <img id="headerLogoImg" src="" alt="Logo OMK Lumajang" class="w-full h-full object-cover transition-transform group-hover:scale-110">
+                    </div>
+                    <div>
+                        <h1 class="font-heading font-extrabold text-base sm:text-xl text-omk-cream tracking-wide leading-tight">
+                            OMK St. Ignatius De Loyola
+                        </h1>
+                        <p class="text-[11px] sm:text-xs text-omk-light/90 font-medium tracking-wide">
+                            Paroki Maria Ratu Damai Lumajang
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Admin Status & Action Buttons -->
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <div id="adminBadge" class="hidden items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-amber-400 text-omk-dark border border-amber-300 shadow-sm animate-pulse">
+                        <i class="fa-solid fa-user-shield mr-1 text-omk-dark"></i>
+                        <span>Admin HP</span>
+                    </div>
+
+                    <button id="adminAuthBtn" onclick="toggleAdminModal()" class="flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-omk-medium hover:bg-omk-light hover:text-omk-deep text-white transition-all border border-omk-light/20 shadow-sm">
+                        <i id="authBtnIcon" class="fa-solid fa-lock text-amber-300"></i>
+                        <span id="authBtnText" class="hidden sm:inline">Masuk Admin</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="bg-gradient-to-b from-omk-deep via-omk-medium to-omk-dark text-white py-10 sm:py-14 px-4 relative overflow-hidden shadow-inner">
+        <div class="absolute -top-12 -left-12 w-60 h-60 bg-omk-accent/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-12 -right-12 w-80 h-80 bg-omk-medium/30 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-medium text-amber-300 mb-3 shadow-sm">
+                <i class="fa-solid fa-photo-film text-amber-300"></i>
+                <span>Dokumentasi Foto & Video Pemuda Katolik Lumajang</span>
+            </div>
+
+            <h2 class="font-heading text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-3 text-omk-cream leading-tight">
+                Galeri Kenangan, Foto & Video OMK
+            </h2>
+
+            <p class="text-omk-light text-xs sm:text-sm max-w-2xl mx-auto font-light leading-relaxed mb-6">
+                Semua rekam jejak momen kegembiraan, misa muda-mudi, video rekaman retret, dan bakti sosial OMK Lumajang tersimpan di sini.
+            </p>
+
+            <div class="max-w-xl mx-auto relative">
+                <div class="relative flex items-center shadow-lg">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 text-omk-medium"></i>
+                    <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Cari foto / video (Contoh: Misa, Retret, Video Koor)..." class="w-full pl-11 pr-4 py-3 rounded-2xl bg-white/95 backdrop-blur-md text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-omk-accent/60 text-xs sm:text-sm transition-all border border-white/40">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+
+        <!-- Admin Control Panel (Hidden by default) -->
+        <div id="adminPanel" class="hidden space-y-6 mb-8">
+            
+            <!-- Logo Setting Box -->
+            <div class="bg-amber-50/90 rounded-3xl p-5 border-2 border-amber-300/80 shadow-md">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-2xl bg-amber-600 text-white flex items-center justify-center shadow flex-shrink-0">
+                            <i class="fa-solid fa-stamp text-base"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-heading text-base font-bold text-amber-900">Pengaturan Logo OMK Lumajang</h3>
+                            <p class="text-xs text-amber-700">Unggah logo baru jika ingin mengganti logo header & footer</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-3">
+                        <label for="logoFileInput" class="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white text-xs font-semibold rounded-xl cursor-pointer transition-all flex items-center space-x-2 shadow">
+                            <i class="fa-solid fa-upload"></i>
+                            <span>Ganti Logo</span>
+                        </label>
+                        <input type="file" id="logoFileInput" accept="image/*" class="hidden" onchange="handleLogoUpload(event)">
+
+                        <button onclick="resetLogoToDefault()" class="px-3 py-2 bg-white border border-amber-300 hover:bg-amber-100 text-amber-800 text-xs font-semibold rounded-xl transition-all">
+                            Reset Default
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Multi-Media Upload Form Box (Photo & Video) -->
+            <div class="bg-white rounded-3xl p-5 sm:p-7 border-2 border-dashed border-omk-medium/40 shadow-xl relative">
+                <div class="flex items-center justify-between border-b border-gray-100 pb-3 mb-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-2xl bg-omk-deep text-omk-accent flex items-center justify-center shadow">
+                            <i class="fa-solid fa-photo-film text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 id="formSectionTitle" class="font-heading text-lg font-bold text-omk-deep">Unggah Foto & Video Kegiatan</h3>
+                            <p class="text-xs text-gray-500">Bisa memilih banyak file foto atau video sekaligus dari HP Anda (Tanpa Batas)</p>
+                        </div>
+                    </div>
+
+                    <button type="button" onclick="cancelEditForm()" class="text-gray-400 hover:text-red-500 transition-colors">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+
+                <form id="uploadForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                    <input type="hidden" id="editingMediaId" value="">
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-omk-deep uppercase tracking-wider mb-1">Judul Kegiatan / Media *</label>
+                            <input type="text" id="mediaTitle" required placeholder="Contoh: Misa Kaum Muda / Video Highlights Retret" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-omk-medium focus:outline-none text-xs sm:text-sm bg-omk-cream/30">
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-bold text-omk-deep uppercase tracking-wider mb-1">Kategori *</label>
+                                <select id="mediaCategory" required class="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-omk-medium focus:outline-none text-xs sm:text-sm bg-omk-cream/30">
+                                    <option value="Misa & Ibadah">Misa & Ibadah</option>
+                                    <option value="Retret & Rekoleksi">Retret & Rekoleksi</option>
+                                    <option value="Bakti Sosial">Bakti Sosial</option>
+                                    <option value="Koor & Seni">Koor & Seni</option>
+                                    <option value="Olahraga & Keakraban">Olahraga & Keakraban</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-omk-deep uppercase tracking-wider mb-1">Tanggal *</label>
+                                <input type="date" id="mediaDate" required class="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-omk-medium focus:outline-none text-xs sm:text-sm bg-omk-cream/30">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-bold text-omk-deep uppercase tracking-wider mb-1">Deskripsi & Cerita Momen *</label>
+                            <textarea id="mediaDescription" rows="3" required placeholder="Tuliskan cerita singkat atau suasana momen di foto/video ini..." class="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-omk-medium focus:outline-none text-xs sm:text-sm bg-omk-cream/30"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-omk-deep uppercase tracking-wider mb-1">Orientasi Layout *</label>
+                            <select id="mediaOrientation" class="w-full px-3 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-omk-medium focus:outline-none text-xs sm:text-sm bg-omk-cream/30">
+                                <option value="auto">Otomatis Deteksi Rasio</option>
+                                <option value="portrait">Potret (Vertikal 3:4 / 9:16)</option>
+                                <option value="landscape">Landscape (Horisontal 16:9)</option>
+                                <option value="square">Persegi (1:1)</option>
+                            </select>
+                            <p class="text-[10px] text-gray-400 mt-1">Mengatur tampilan tinggi kartu di galeri grid.</p>
+                        </div>
+                    </div>
+
+                    <!-- Multi Media Upload Input Area -->
+                    <div>
+                        <div class="flex items-center justify-between mb-1">
+                            <label class="block text-xs font-bold text-omk-deep uppercase tracking-wider">File Media * (Foto & Video)</label>
+                            <span id="selectedCountBadge" class="hidden text-xs font-extrabold text-omk-medium bg-omk-light px-2.5 py-0.5 rounded-full"></span>
+                        </div>
+                        
+                        <div class="flex items-center justify-center w-full">
+                            <label for="mediaFileInput" class="flex flex-col items-center justify-center w-full min-h-[130px] border-2 border-omk-medium/30 border-dashed rounded-2xl cursor-pointer bg-omk-cream/20 hover:bg-omk-light/40 transition-all p-4">
+                                <div id="uploadPlaceholder" class="flex flex-col items-center justify-center text-center">
+                                    <div class="flex items-center space-x-2 text-omk-medium mb-1">
+                                        <i class="fa-solid fa-camera text-2xl"></i>
+                                        <i class="fa-solid fa-plus text-sm"></i>
+                                        <i class="fa-solid fa-video text-2xl"></i>
+                                    </div>
+                                    <p class="text-xs text-gray-700 font-bold">Klik di sini untuk memilih banyak foto atau video</p>
+                                    <p class="text-[10px] text-gray-500 mt-0.5">Mendukung format gambar (JPG, PNG) dan video (MP4, MOV, WEBM) tanpa batas</p>
+                                </div>
+
+                                <!-- Multi Media Preview Grid -->
+                                <div id="multiPreviewGrid" class="hidden w-full grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-3 mt-2">
+                                    <!-- Dynamic batch previews -->
+                                </div>
+
+                                <input id="mediaFileInput" type="file" accept="image/*,video/*" multiple class="hidden" onchange="previewBatchFiles(event)">
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Upload Progress Indicator Bar -->
+                    <div id="uploadProgressContainer" class="hidden space-y-1">
+                        <div class="flex items-center justify-between text-xs font-bold text-omk-deep">
+                            <span id="progressStatusText">Proses mengunggah...</span>
+                            <span id="progressPercentText">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 h-2.5 rounded-full overflow-hidden">
+                            <div id="progressBar" class="bg-amber-400 h-full w-0 transition-all duration-300"></div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex items-center justify-end space-x-2 pt-2">
+                        <button type="button" onclick="cancelEditForm()" class="px-4 py-2 rounded-xl border border-gray-300 text-gray-600 text-xs font-semibold hover:bg-gray-100 transition-colors">
+                            Batal / Reset
+                        </button>
+                        <button type="submit" id="submitBtn" class="px-5 py-2.5 rounded-xl bg-omk-medium hover:bg-omk-deep text-white text-xs font-bold shadow-md flex items-center space-x-2 transition-all">
+                            <i class="fa-solid fa-paper-plane text-amber-300"></i>
+                            <span id="submitBtnLabel">Unggah Ke Galeri</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Media Type & Category Filters -->
+        <div class="space-y-4 mb-6">
+            <!-- Media Type Switcher (Semua / Hanya Foto / Hanya Video) -->
+            <div class="flex items-center justify-center sm:justify-start space-x-2 border-b border-gray-200 pb-3">
+                <button onclick="filterMediaType('all')" id="typeBtnAll" class="media-type-btn px-4 py-1.5 rounded-xl text-xs font-extrabold bg-omk-deep text-amber-300 shadow-sm flex items-center space-x-1.5 transition-all">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <span>Semua Media</span>
+                    <span id="countAllBadge" class="ml-1 px-1.5 py-0.2 bg-white/20 rounded-full text-[10px]">0</span>
+                </button>
+                <button onclick="filterMediaType('image')" id="typeBtnImage" class="media-type-btn px-4 py-1.5 rounded-xl text-xs font-bold bg-white text-gray-600 border border-gray-200 hover:bg-omk-cream flex items-center space-x-1.5 transition-all">
+                    <i class="fa-solid fa-image text-omk-medium"></i>
+                    <span>Hanya Foto</span>
+                    <span id="countImageBadge" class="ml-1 px-1.5 py-0.2 bg-gray-100 rounded-full text-[10px]">0</span>
+                </button>
+                <button onclick="filterMediaType('video')" id="typeBtnVideo" class="media-type-btn px-4 py-1.5 rounded-xl text-xs font-bold bg-white text-gray-600 border border-gray-200 hover:bg-omk-cream flex items-center space-x-1.5 transition-all">
+                    <i class="fa-solid fa-video text-amber-600"></i>
+                    <span>Hanya Video</span>
+                    <span id="countVideoBadge" class="ml-1 px-1.5 py-0.2 bg-gray-100 rounded-full text-[10px]">0</span>
+                </button>
+            </div>
+
+            <!-- Categories horizontal scroll -->
+            <div class="flex items-center space-x-2 overflow-x-auto no-scrollbar py-1" id="categoryFilterContainer">
+                <button onclick="filterCategory('Semua')" class="cat-btn active px-4 py-1.5 rounded-2xl text-xs font-bold transition-all shadow-sm whitespace-nowrap bg-omk-medium text-white">
+                    Semua Kategori
+                </button>
+                <button onclick="filterCategory('Misa & Ibadah')" class="cat-btn px-4 py-1.5 rounded-2xl text-xs font-semibold transition-all whitespace-nowrap bg-white text-gray-700 hover:bg-omk-light border border-gray-200">
+                    <i class="fa-solid fa-church mr-1.5 text-omk-medium"></i> Misa & Ibadah
+                </button>
+                <button onclick="filterCategory('Retret & Rekoleksi')" class="cat-btn px-4 py-1.5 rounded-2xl text-xs font-semibold transition-all whitespace-nowrap bg-white text-gray-700 hover:bg-omk-light border border-gray-200">
+                    <i class="fa-solid fa-campground mr-1.5 text-omk-medium"></i> Retret & Rekoleksi
+                </button>
+                <button onclick="filterCategory('Bakti Sosial')" class="cat-btn px-4 py-1.5 rounded-2xl text-xs font-semibold transition-all whitespace-nowrap bg-white text-gray-700 hover:bg-omk-light border border-gray-200">
+                    <i class="fa-solid fa-hand-holding-heart mr-1.5 text-omk-medium"></i> Bakti Sosial
+                </button>
+                <button onclick="filterCategory('Koor & Seni')" class="cat-btn px-4 py-1.5 rounded-2xl text-xs font-semibold transition-all whitespace-nowrap bg-white text-gray-700 hover:bg-omk-light border border-gray-200">
+                    <i class="fa-solid fa-music mr-1.5 text-omk-medium"></i> Koor & Seni
+                </button>
+                <button onclick="filterCategory('Olahraga & Keakraban')" class="cat-btn px-4 py-1.5 rounded-2xl text-xs font-semibold transition-all whitespace-nowrap bg-white text-gray-700 hover:bg-omk-light border border-gray-200">
+                    <i class="fa-solid fa-volleyball mr-1.5 text-omk-medium"></i> Olahraga
+                </button>
+            </div>
+        </div>
+
+        <div id="galleryMasonry" class="masonry-grid">
+            <!-- Dynamic Photo/Video Cards Inserted Here -->
+        </div>
+
+        <!-- Empty State Message -->
+        <div id="emptyState" class="hidden flex-col items-center justify-center py-16 text-center">
+            <div class="w-20 h-20 rounded-full bg-omk-light text-omk-medium flex items-center justify-center text-3xl mb-3 shadow-inner">
+                <i class="fa-solid fa-photo-film"></i>
+            </div>
+            <h3 class="font-heading text-lg font-bold text-omk-deep">Tidak Ada File Ditemukan</h3>
+            <p class="text-xs text-gray-500 max-w-sm mt-1">Coba gunakan kata kunci pencarian lain atau sesuaikan filter media yang dipilih.</p>
+        </div>
+    </main>
+
+    <footer class="bg-omk-dark text-white py-10 mt-12 border-t border-omk-accent/30 flex-shrink-0">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex flex-col items-center justify-center space-y-3 mb-4">
+                <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-omk-accent bg-omk-cream shadow-lg">
+                    <img id="footerLogoImg" src="" alt="Logo OMK" class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <h4 class="font-heading font-extrabold text-lg text-amber-300 tracking-wide">OMK St. Ignatius De Loyola</h4>
+                    <p class="text-xs text-omk-light/80">Paroki Maria Ratu Damai Lumajang</p>
+                </div>
+            </div>
+
+            <p class="text-xs text-omk-light/60 max-w-md mx-auto italic mb-6">
+                "Ad Maiorem Dei Gloriam - Demi Kemuliaan Allah Yang Lebih Besar"
+            </p>
+
+            <div class="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-omk-light/70 space-y-2 sm:space-y-0">
+                <p>&copy; 2026 OMK Lumajang. Seluruh Dokumentasi Terjaga.</p>
+                <button onclick="toggleAdminModal()" class="hover:text-amber-300 transition-colors flex items-center space-x-1 font-semibold">
+                    <i class="fa-solid fa-lock text-[10px]"></i>
+                    <span>Login Pengurus Admin</span>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Admin Verification Modal -->
+    <div id="adminAuthModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm hidden p-4">
+        <div class="bg-white rounded-3xl max-w-xs w-full p-6 shadow-2xl relative">
+            <button onclick="toggleAdminModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="text-center mb-5">
+                <div class="w-12 h-12 bg-omk-light text-omk-deep rounded-2xl flex items-center justify-center mx-auto mb-2 text-xl shadow">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                <h3 class="font-heading font-bold text-lg text-omk-deep">Akses Admin HP</h3>
+                <p class="text-xs text-gray-500 mt-1">Masukkan PIN Rahasia untuk mengunggah atau mengedit foto/video</p>
+            </div>
+
+            <form onsubmit="verifyAdminPin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-[10px] font-bold text-gray-700 uppercase tracking-wider mb-1">PIN KHUSUS ADMIN</label>
+                    <input type="password" id="adminPinInput" placeholder="Masukkan PIN" maxlength="8" required class="w-full text-center tracking-widest text-lg font-bold py-2.5 px-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-omk-medium focus:outline-none bg-omk-cream/30">
+                </div>
+
+                <div id="pinErrorMessage" class="hidden text-xs text-red-500 font-semibold text-center">
+                    PIN Salah! Silakan coba lagi.
+                </div>
+
+                <button type="submit" class="w-full py-2.5 bg-omk-medium hover:bg-omk-deep text-white font-bold rounded-xl text-xs shadow-md transition-all">
+                    Verifikasi & Masuk
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Media Lightbox Player Modal (Supports Photo & Video) -->
+    <div id="lightboxModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md hidden p-3 sm:p-6 overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-4xl w-full overflow-hidden shadow-2xl relative my-auto flex flex-col md:flex-row max-h-[92vh]">
+            
+            <button onclick="closeLightbox()" class="absolute top-3 right-3 z-20 w-10 h-10 bg-black/60 hover:bg-black text-white rounded-full flex items-center justify-center backdrop-blur-md transition-all border border-white/20">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <!-- Media Container (Switch between <img> and <video>) -->
+            <div id="lightboxMediaContainer" class="md:w-3/5 bg-black flex items-center justify-center min-h-[250px] max-h-[50vh] md:max-h-[85vh] p-2 relative overflow-hidden">
+                <!-- Injected via JS -->
+            </div>
+
+            <!-- Details Container -->
+            <div class="md:w-2/5 p-5 sm:p-6 flex flex-col justify-between bg-white overflow-y-auto">
+                <div>
+                    <div class="flex items-center space-x-2 mb-2">
+                        <span id="lightboxCategory" class="px-3 py-1 bg-omk-light text-omk-deep text-xs font-bold rounded-full"></span>
+                        <span id="lightboxDate" class="text-xs text-gray-400 font-medium"></span>
+                    </div>
+
+                    <h3 id="lightboxTitle" class="font-heading font-extrabold text-lg sm:text-xl text-omk-deep mb-2 leading-tight"></h3>
+                    <div class="w-12 h-1 bg-omk-accent rounded-full mb-3"></div>
+
+                    <p id="lightboxDesc" class="text-xs sm:text-sm text-gray-600 leading-relaxed font-normal whitespace-pre-line"></p>
+                </div>
+
+                <div class="pt-5 mt-5 border-t border-gray-100 flex items-center justify-between">
+                    <span id="lightboxTypeTag" class="text-[11px] text-gray-400 font-semibold">OMK Lumajang Gallery</span>
+                    <div id="lightboxAdminActions" class="hidden items-center space-x-2">
+                        <button id="lightboxEditBtn" onclick="editCurrentMedia()" class="px-3 py-1.5 bg-amber-50 text-amber-800 hover:bg-amber-500 hover:text-white rounded-xl text-xs font-bold transition-all border border-amber-200 flex items-center space-x-1">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            <span>Edit</span>
+                        </button>
+                        <button id="lightboxDeleteBtn" onclick="deleteCurrentMedia()" class="px-3 py-1.5 bg-red-50 text-red-600 hover:bg-red-600 hover:text-white rounded-xl text-xs font-bold transition-all border border-red-200 flex items-center space-x-1">
+                            <i class="fa-solid fa-trash-can"></i>
+                            <span>Hapus</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-omk-dark text-white px-4 py-3 rounded-2xl shadow-2xl flex items-center space-x-3 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none border border-omk-accent/40">
+        <div class="w-7 h-7 rounded-full bg-omk-medium text-amber-300 flex items-center justify-center text-xs">
+            <i class="fa-solid fa-check"></i>
+        </div>
+        <span id="toastMsg" class="text-xs font-semibold">Pesan Notifikasi</span>
+    </div>
+
+    <script>
+        const DEFAULT_PIN = "317";
+        const DB_NAME = "OMKLumajangDB";
+        const DB_VERSION = 1;
+        const STORE_NAME = "mediaItems";
+
+        let db = null;
+        let mediaItems = [];
+        let currentLogo = '';
+        let isAdmin = false;
+        let currentFilterCategory = 'Semua';
+        let currentMediaType = 'all'; // 'all', 'image', 'video'
+        let searchQuery = '';
+        let activeMediaId = null;
+        let selectedBatchFiles = [];
+
+        // Generate SVG Vector Logo for OMK Lumajang
+        function createDefaultLogoSVG() {
+            const svgString = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+                <circle cx="150" cy="150" r="145" fill="#F5F3E9" stroke="#1E3A2B" stroke-width="8"/>
+                <circle cx="150" cy="150" r="125" fill="none" stroke="#2D5A40" stroke-width="4" stroke-dasharray="6,4"/>
+                <path id="textPath" d="M 40,150 A 110,110 0 1,1 260,150" fill="none"/>
+                <text font-family="'Outfit', sans-serif" font-weight="800" font-size="16" fill="#1E3A2B" letter-spacing="2">
+                    <textPath href="#textPath" startOffset="50%" text-anchor="middle">OMK LUMAJANG</textPath>
+                </text>
+                <g transform="translate(110, 85) scale(0.28)">
+                    <path fill="#1E3A2B" d="M140,20 C100,20 80,50 80,80 C80,110 100,130 110,150 C120,170 115,190 100,210 C90,220 70,230 50,230 C40,230 30,225 30,225 L25,245 C25,245 40,255 60,255 C90,255 125,240 140,210 C155,180 150,150 140,130 C130,110 120,95 130,80 C140,65 160,60 170,80 C175,90 175,105 170,120 L188,126 C195,105 195,80 185,60 C170,30 150,20 140,20 Z"/>
+                    <rect x="135" y="110" width="18" height="60" fill="#D4AF37"/>
+                    <rect x="114" y="128" width="60" height="18" fill="#D4AF37"/>
+                </g>
+                <path id="bottomTextPath" d="M 260,150 A 110,110 0 0,1 40,150" fill="none"/>
+                <text font-family="'Inter', sans-serif" font-weight="700" font-size="11" fill="#2D5A40" letter-spacing="1">
+                    <textPath href="#bottomTextPath" startOffset="50%" text-anchor="middle">ST. IGNATIUS DE LOYOLA</textPath>
+                </text>
+            </svg>`;
+            return 'data:image/svg+xml;utf8,' + encodeURIComponent(svgString);
+        }
+
+        // Sample initial dataset (Photos + Video)
+        const sampleInitialData = [
+            {
+                id: 'sample-portrait-1',
+                type: 'image',
+                title: 'Misa Kaum Muda & Perayaan Ekaristi',
+                category: 'Misa & Ibadah',
+                date: '2026-02-15',
+                orientation: 'portrait',
+                description: 'Perayaan Misa Orang Muda Katolik Lumajang yang dipenuhi dengan antusiasme suka cita. Petugas lektor dan koor dari OMK melayani dengan penuh khidmat.',
+                mediaUrl: 'https://images.unsplash.com/photo-1543807535-eceef0bc6599?auto=format&fit=crop&w=800&q=80',
+                createdAt: Date.now() - 500000
+            },
+            {
+                id: 'sample-video-1',
+                type: 'video',
+                title: 'Highlights Retret OMK Lumajang',
+                category: 'Retret & Rekoleksi',
+                date: '2026-02-01',
+                orientation: 'landscape',
+                description: 'Cuplikan video kebersamaan, dinamika kelompok, dan malam keakraban saat retret tahunan OMK Lumajang di Senduro.',
+                mediaUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+                createdAt: Date.now() - 450000
+            },
+            {
+                id: 'sample-landscape-1',
+                title: 'Kebersamaan Peserta Retret OMK',
+                category: 'Retret & Rekoleksi',
+                date: '2026-01-20',
+                orientation: 'landscape',
+                description: 'Momen kebersamaan seluruh anggota OMK St. Ignatius De Loyola saat retret di kawasan Senduro Lumajang.',
+                mediaUrl: 'https://images.unsplash.com/photo-1526976668912-1a811878dd37?auto=format&fit=crop&w=800&q=80',
+                createdAt: Date.now() - 400000
+            },
+            {
+                id: 'sample-portrait-2',
+                title: 'Pelayanan Vokal & Koor OMK',
+                category: 'Koor & Seni',
+                date: '2026-01-10',
+                orientation: 'portrait',
+                description: 'Latihan rutin tim koor OMK mempersiapkan lagu-lagu pujian liturgi Minggu Palma Paroki Maria Ratu Damai Lumajang.',
+                mediaUrl: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80',
+                createdAt: Date.now() - 350000
+            },
+            {
+                id: 'sample-landscape-2',
+                title: 'Aksi Baksos & Berbagi Sembako Paroki',
+                category: 'Bakti Sosial',
+                date: '2025-12-22',
+                orientation: 'landscape',
+                description: 'Aksi nyata solidaritas pemuda Katolik menyalurkan bantuan sembako dan kasih natal kepada masyarakat di Lumajang.',
+                mediaUrl: 'https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=800&q=80',
+                createdAt: Date.now() - 300000
+            }
+        ];
+
+        // Initialize IndexedDB
+        function initDB() {
+            return new Promise((resolve, reject) => {
+                const request = indexedDB.open(DB_NAME, DB_VERSION);
+
+                request.onupgradeneeded = function(e) {
+                    db = e.target.result;
+                    if (!db.objectStoreNames.contains(STORE_NAME)) {
+                        db.createObjectStore(STORE_NAME, { keyPath: 'id' });
+                    }
+                };
+
+                request.onsuccess = function(e) {
+                    db = e.target.result;
+                    resolve(db);
+                };
+
+                request.onerror = function(e) {
+                    console.error("IndexedDB error:", e);
+                    reject(e);
+                };
+            });
+        }
+
+        async function getAllMediaFromDB() {
+            return new Promise((resolve) => {
+                if (!db) { resolve([]); return; }
+                const tx = db.transaction(STORE_NAME, 'readonly');
+                const store = tx.objectStore(STORE_NAME);
+                const req = store.getAll();
+                req.onsuccess = function() {
+                    resolve(req.result || []);
+                };
+                req.onerror = function() {
+                    resolve([]);
+                };
+            });
+        }
+
+        async function saveMediaToDB(item) {
+            return new Promise((resolve, reject) => {
+                if (!db) { reject("DB not initialized"); return; }
+                const tx = db.transaction(STORE_NAME, 'readwrite');
+                const store = tx.objectStore(STORE_NAME);
+                const req = store.put(item);
+                req.onsuccess = () => resolve();
+                req.onerror = (e) => reject(e);
+            });
+        }
+
+        async function deleteMediaFromDB(id) {
+            return new Promise((resolve, reject) => {
+                if (!db) { reject("DB not initialized"); return; }
+                const tx = db.transaction(STORE_NAME, 'readwrite');
+                const store = tx.objectStore(STORE_NAME);
+                const req = store.delete(id);
+                req.onsuccess = () => resolve();
+                req.onerror = (e) => reject(e);
+            });
+        }
+
+        // App Initialization
+        window.addEventListener('DOMContentLoaded', async () => {
+            loadLogoFromStorage();
+            try {
+                await initDB();
+                const storedMedia = await getAllMediaFromDB();
+                if (storedMedia && storedMedia.length > 0) {
+                    mediaItems = storedMedia;
+                } else {
+                    mediaItems = [...sampleInitialData];
+                    for (const item of mediaItems) {
+                        await saveMediaToDB(item);
+                    }
+                }
+            } catch (err) {
+                console.warn("Falling back to sample data", err);
+                mediaItems = [...sampleInitialData];
+            }
+            updateBadgesCount();
+            renderGallery();
+        });
+
+        function loadLogoFromStorage() {
+            const savedLogo = localStorage.getItem('omk_lumajang_logo_v2');
+            if (savedLogo) {
+                currentLogo = savedLogo;
+            } else {
+                currentLogo = createDefaultLogoSVG();
+            }
+            updateLogoDisplay();
+        }
+
+        function updateLogoDisplay() {
+            document.getElementById('headerLogoImg').src = currentLogo;
+            document.getElementById('footerLogoImg').src = currentLogo;
+        }
+
+        function handleLogoUpload(event) {
+            if (!isAdmin) return;
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    currentLogo = e.target.result;
+                    localStorage.setItem('omk_lumajang_logo_v2', currentLogo);
+                    updateLogoDisplay();
+                    showToast("Logo OMK berhasil diperbarui!");
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function resetLogoToDefault() {
+            if (!isAdmin) return;
+            currentLogo = createDefaultLogoSVG();
+            localStorage.removeItem('omk_lumajang_logo_v2');
+            updateLogoDisplay();
+            showToast("Logo dikembalikan ke format default OMK.");
+        }
+
+        function updateBadgesCount() {
+            const total = mediaItems.length;
+            const imagesCount = mediaItems.filter(m => m.type === 'image').length;
+            const videosCount = mediaItems.filter(m => m.type === 'video').length;
+
+            document.getElementById('countAllBadge').innerText = total;
+            document.getElementById('countImageBadge').innerText = imagesCount;
+            document.getElementById('countVideoBadge').innerText = videosCount;
+        }
+
+        function renderGallery() {
+            const grid = document.getElementById('galleryMasonry');
+            const emptyState = document.getElementById('emptyState');
+            grid.innerHTML = '';
+
+            const filtered = mediaItems.filter(item => {
+                const matchesCategory = (currentFilterCategory === 'Semua') || (item.category === currentFilterCategory);
+                const matchesType = (currentMediaType === 'all') || (item.type === currentMediaType);
+                const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                                      item.description.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesCategory && matchesType && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                emptyState.classList.remove('hidden');
+                emptyState.classList.add('flex');
+            } else {
+                emptyState.classList.add('hidden');
+                emptyState.classList.remove('flex');
+
+                filtered.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = "masonry-item bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-gray-100 transition-all duration-300 cursor-pointer group flex flex-col justify-between";
+                    card.onclick = () => openLightbox(item.id);
+
+                    const isPortrait = item.orientation === 'portrait';
+                    const isSquare = item.orientation === 'square';
+                    const isVideo = item.type === 'video';
+                    
+                    let aspectClass = "aspect-[16/9]";
+                    let orientLabel = isVideo ? "Video Landscape" : "Landscape 16:9";
+                    let orientIcon = isVideo ? "fa-video" : "fa-image";
+
+                    if (isPortrait) {
+                        aspectClass = isVideo ? "aspect-[9/16]" : "aspect-[3/4]";
+                        orientLabel = isVideo ? "Video Potret" : "Potret 3:4";
+                        orientIcon = isVideo ? "fa-mobile-screen-button" : "fa-mobile-screen";
+                    } else if (isSquare) {
+                        aspectClass = "aspect-square";
+                        orientLabel = isVideo ? "Video Persegi" : "Persegi 1:1";
+                        orientIcon = "fa-square";
+                    }
+
+                    // Media Thumbnail element
+                    let mediaElementHtml = '';
+                    if (isVideo) {
+                        mediaElementHtml = `
+                            <div class="relative w-full h-full bg-black flex items-center justify-center">
+                                <video src="${item.mediaUrl}#t=0.5" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" preload="metadata"></video>
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="w-12 h-12 rounded-full bg-amber-500/90 group-hover:scale-110 text-omk-dark flex items-center justify-center shadow-lg backdrop-blur-md transition-all">
+                                        <i class="fa-solid fa-play text-lg ml-0.5"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        mediaElementHtml = `
+                            <img src="${item.mediaUrl}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.src='https://placehold.co/600x800/1E3A2B/FFFFFF?text=OMK+Lumajang'">
+                        `;
+                    }
+
+                    card.innerHTML = `
+                        <div class="relative w-full ${aspectClass} overflow-hidden bg-gray-100">
+                            ${mediaElementHtml}
+                            
+                            <div class="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none z-10">
+                                <span class="px-2.5 py-1 rounded-full text-[10px] font-extrabold bg-omk-deep/85 text-amber-300 backdrop-blur-md shadow">
+                                    ${item.category}
+                                </span>
+
+                                <span class="px-2 py-0.5 rounded-full text-[9px] font-bold ${isVideo ? 'bg-amber-500 text-omk-dark' : 'bg-black/50 text-white'} backdrop-blur-md shadow">
+                                    <i class="fa-solid ${orientIcon} mr-1"></i>${orientLabel}
+                                </span>
+                            </div>
+
+                            ${isAdmin ? `
+                                <div class="absolute bottom-3 right-3 flex items-center space-x-1 z-10" onclick="event.stopPropagation()">
+                                    <button onclick="prepareEditMedia('${item.id}')" class="w-8 h-8 rounded-full bg-amber-500/90 text-white hover:bg-amber-600 flex items-center justify-center shadow backdrop-blur-md transition-all">
+                                        <i class="fa-solid fa-pen text-xs"></i>
+                                    </button>
+                                    <button onclick="deleteMedia('${item.id}')" class="w-8 h-8 rounded-full bg-red-600/90 text-white hover:bg-red-700 flex items-center justify-center shadow backdrop-blur-md transition-all">
+                                        <i class="fa-solid fa-trash text-xs"></i>
+                                    </button>
+                                </div>
+                            ` : ''}
+                        </div>
+
+                        <div class="p-4 flex-grow flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center text-[11px] text-gray-400 font-medium mb-1">
+                                    <i class="fa-regular fa-calendar-check mr-1.5 text-omk-medium"></i>
+                                    <span>${formatDate(item.date)}</span>
+                                </div>
+                                <h3 class="font-heading font-bold text-sm sm:text-base text-omk-deep group-hover:text-omk-medium transition-colors line-clamp-2 leading-snug mb-1">
+                                    ${item.title}
+                                </h3>
+                                <p class="text-xs text-gray-600 line-clamp-3 leading-relaxed font-normal">
+                                    ${item.description}
+                                </p>
+                            </div>
+
+                            <div class="pt-3 mt-3 border-t border-gray-100 flex items-center justify-between text-[11px] font-bold text-omk-medium">
+                                <span class="group-hover:underline flex items-center">
+                                    ${isVideo ? '<i class="fa-solid fa-circle-play mr-1 text-amber-600"></i> Putar Video' : 'Lihat Foto'} <i class="fa-solid fa-arrow-right ml-1 text-[9px]"></i>
+                                </span>
+                            </div>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+            }
+        }
+
+        function formatDate(dateStr) {
+            if(!dateStr) return '';
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateStr).toLocaleDateString('id-ID', options);
+        }
+
+        function toggleAdminModal() {
+            if (isAdmin) {
+                toggleAdminMode(false);
+                showToast("Keluar dari Mode Admin");
+            } else {
+                const modal = document.getElementById('adminAuthModal');
+                modal.classList.toggle('hidden');
+                document.getElementById('adminPinInput').value = '';
+                document.getElementById('pinErrorMessage').classList.add('hidden');
+            }
+        }
+
+        function verifyAdminPin(event) {
+            event.preventDefault();
+            const inputPin = document.getElementById('adminPinInput').value;
+            if (inputPin === DEFAULT_PIN) {
+                toggleAdminMode(true);
+                document.getElementById('adminAuthModal').classList.add('hidden');
+                showToast("Selamat Datang Admin Pengurus OMK!");
+            } else {
+                document.getElementById('pinErrorMessage').classList.remove('hidden');
+            }
+        }
+
+        function toggleAdminMode(enable) {
+            isAdmin = enable;
+            const panel = document.getElementById('adminPanel');
+            const adminBadge = document.getElementById('adminBadge');
+            const authBtnText = document.getElementById('authBtnText');
+            const authBtnIcon = document.getElementById('authBtnIcon');
+
+            if (isAdmin) {
+                panel.classList.remove('hidden');
+                adminBadge.classList.remove('hidden');
+                adminBadge.classList.add('flex');
+                authBtnText.innerText = 'Keluar Admin';
+                authBtnIcon.className = 'fa-solid fa-right-from-bracket text-red-400';
+            } else {
+                panel.classList.add('hidden');
+                adminBadge.classList.add('hidden');
+                adminBadge.classList.remove('flex');
+                authBtnText.innerText = 'Masuk Admin';
+                authBtnIcon.className = 'fa-solid fa-lock text-amber-300';
+            }
+
+            renderGallery();
+        }
+
+        function previewBatchFiles(event) {
+            const files = Array.from(event.target.files);
+            if (files.length > 0) {
+                selectedBatchFiles = files;
+                renderBatchPreviews();
+            }
+        }
+
+        function renderBatchPreviews() {
+            const grid = document.getElementById('multiPreviewGrid');
+            const placeholder = document.getElementById('uploadPlaceholder');
+            const badge = document.getElementById('selectedCountBadge');
+
+            if (selectedBatchFiles.length === 0) {
+                grid.classList.add('hidden');
+                grid.innerHTML = '';
+                placeholder.classList.remove('hidden');
+                badge.classList.add('hidden');
+                return;
+            }
+
+            placeholder.classList.add('hidden');
+            grid.classList.remove('hidden');
+            grid.innerHTML = '';
+
+            badge.innerText = `${selectedBatchFiles.length} File Dipilih`;
+            badge.classList.remove('hidden');
+
+            selectedBatchFiles.forEach((file, index) => {
+                const isVideo = file.type.startsWith('video/');
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const item = document.createElement('div');
+                    item.className = "relative rounded-xl overflow-hidden bg-gray-200 border border-gray-300 aspect-square group shadow-sm flex items-center justify-center";
+                    
+                    if (isVideo) {
+                        item.innerHTML = `
+                            <video src="${e.target.result}" class="w-full h-full object-cover opacity-80"></video>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <i class="fa-solid fa-circle-play text-2xl text-amber-400 shadow"></i>
+                            </div>
+                            <button type="button" onclick="removeFileFromBatch(${index}, event)" class="absolute top-1 right-1 w-6 h-6 bg-red-600 text-white rounded-full flex items-center justify-center text-xs shadow hover:scale-110 transition-all z-10">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                            <span class="absolute bottom-1 left-1 bg-black/60 text-white text-[9px] px-1.5 py-0.5 rounded font-mono">VIDEO #${index + 1}</span>
+                        `;
+                    } else {
+                        item.innerHTML = `
+                            <img src="${e.target.result}" class="w-full h-full object-cover">
+                            <button type="button" onclick="removeFileFromBatch(${index}, event)" class="absolute top-1 right-1 w-6 h-6 bg-red-600 text-white rounded-full flex items-center justify-center text-xs shadow hover:scale-110 transition-all z-10">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                            <span class="absolute bottom-1 left-1 bg-black/60 text-white text-[9px] px-1.5 py-0.5 rounded font-mono">#${index + 1}</span>
+                        `;
+                    }
+                    grid.appendChild(item);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function removeFileFromBatch(index, event) {
+            event.preventDefault();
+            event.stopPropagation();
+            selectedBatchFiles.splice(index, 1);
+            renderBatchPreviews();
+        }
+
+        function cancelEditForm() {
+            document.getElementById('uploadForm').reset();
+            document.getElementById('editingMediaId').value = '';
+            selectedBatchFiles = [];
+            document.getElementById('formSectionTitle').innerText = 'Unggah Foto & Video Kegiatan';
+            document.getElementById('submitBtnLabel').innerText = 'Unggah Ke Galeri';
+            document.getElementById('uploadProgressContainer').classList.add('hidden');
+            renderBatchPreviews();
+        }
+
+        function prepareEditMedia(id) {
+            const item = mediaItems.find(p => p.id === id);
+            if (!item) return;
+
+            document.getElementById('editingMediaId').value = item.id;
+            document.getElementById('mediaTitle').value = item.title;
+            document.getElementById('mediaCategory').value = item.category;
+            document.getElementById('mediaDate').value = item.date;
+            document.getElementById('mediaDescription').value = item.description;
+            document.getElementById('mediaOrientation').value = item.orientation || 'auto';
+
+            document.getElementById('formSectionTitle').innerText = item.type === 'video' ? 'Edit Video Kegiatan' : 'Edit Foto Kegiatan';
+            document.getElementById('submitBtnLabel').innerText = 'Simpan Perubahan';
+
+            selectedBatchFiles = [];
+            const grid = document.getElementById('multiPreviewGrid');
+            const placeholder = document.getElementById('uploadPlaceholder');
+            placeholder.classList.add('hidden');
+            grid.classList.remove('hidden');
+
+            const isVideo = item.type === 'video';
+            grid.innerHTML = `
+                <div class="relative rounded-xl overflow-hidden bg-gray-200 border border-gray-300 aspect-square shadow-sm col-span-2">
+                    ${isVideo ? `<video src="${item.mediaUrl}" class="w-full h-full object-cover"></video>` : `<img src="${item.mediaUrl}" class="w-full h-full object-cover">`}
+                </div>
+            `;
+
+            window.scrollTo({ top: 200, behavior: 'smooth' });
+            closeLightbox();
+        }
+
+        async function handleFormSubmit(event) {
+            event.preventDefault();
+            if (!isAdmin) return;
+
+            const editingId = document.getElementById('editingMediaId').value;
+            const title = document.getElementById('mediaTitle').value;
+            const category = document.getElementById('mediaCategory').value;
+            const date = document.getElementById('mediaDate').value;
+            const description = document.getElementById('mediaDescription').value;
+            const orientationSelect = document.getElementById('mediaOrientation');
+
+            // Editing existing media
+            if (editingId) {
+                const index = mediaItems.findIndex(p => p.id === editingId);
+                if (index !== -1) {
+                    mediaItems[index].title = title;
+                    mediaItems[index].category = category;
+                    mediaItems[index].date = date;
+                    mediaItems[index].description = description;
+                    if (orientationSelect.value !== 'auto') {
+                        mediaItems[index].orientation = orientationSelect.value;
+                    }
+
+                    if (selectedBatchFiles.length > 0) {
+                        const file = selectedBatchFiles[0];
+                        const isVideo = file.type.startsWith('video/');
+                        const dataUrl = await readFileAsDataURL(file);
+                        mediaItems[index].mediaUrl = dataUrl;
+                        mediaItems[index].type = isVideo ? 'video' : 'image';
+                    }
+
+                    await saveMediaToDB(mediaItems[index]);
+                    updateBadgesCount();
+                    renderGallery();
+                    cancelEditForm();
+                    showToast("Data media berhasil diperbarui!");
+                }
+                return;
+            }
+
+            // Batch upload new photos/videos
+            if (selectedBatchFiles.length === 0) {
+                showToast("Pilih setidaknya 1 foto atau video terlebih dahulu!");
+                return;
+            }
+
+            const progressContainer = document.getElementById('uploadProgressContainer');
+            const statusText = document.getElementById('progressStatusText');
+            const percentText = document.getElementById('progressPercentText');
+            const progressBar = document.getElementById('progressBar');
+            const submitBtn = document.getElementById('submitBtn');
+
+            progressContainer.classList.remove('hidden');
+            submitBtn.disabled = true;
+
+            const total = selectedBatchFiles.length;
+            let completed = 0;
+
+            for (let i = 0; i < total; i++) {
+                const file = selectedBatchFiles[i];
+                const isVideo = file.type.startsWith('video/');
+                statusText.innerText = `Mengunggah ${isVideo ? 'video' : 'foto'} ${i + 1} dari ${total}...`;
+
+                const dataUrl = await readFileAsDataURL(file);
+                let autoOrientation = orientationSelect.value;
+
+                if (autoOrientation === 'auto') {
+                    autoOrientation = isVideo ? 'landscape' : await detectImageOrientation(dataUrl);
+                }
+
+                const newMedia = {
+                    id: 'omk-media-' + Date.now() + '-' + i,
+                    type: isVideo ? 'video' : 'image',
+                    title: total > 1 ? `${title} (${i + 1})` : title,
+                    category: category,
+                    date: date,
+                    description: description,
+                    orientation: autoOrientation,
+                    mediaUrl: dataUrl,
+                    createdAt: Date.now() + i
+                };
+
+                mediaItems.unshift(newMedia);
+                await saveMediaToDB(newMedia);
+                completed++;
+
+                const percent = Math.round((completed / total) * 100);
+                progressBar.style.width = percent + '%';
+                percentText.innerText = percent + '%';
+            }
+
+            updateBadgesCount();
+            renderGallery();
+            submitBtn.disabled = false;
+            cancelEditForm();
+            showToast(`Berhasil mengunggah ${total} file media ke galeri!`);
+        }
+
+        function readFileAsDataURL(file) {
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onload = (e) => resolve(e.target.result);
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function detectImageOrientation(dataUrl) {
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.onload = function() {
+                    if (this.height > this.width * 1.1) {
+                        resolve('portrait');
+                    } else if (this.width > this.height * 1.1) {
+                        resolve('landscape');
+                    } else {
+                        resolve('square');
+                    }
+                };
+                img.onerror = function() {
+                    resolve('landscape');
+                };
+                img.src = dataUrl;
+            });
+        }
+
+        async function deleteMedia(id) {
+            if (!isAdmin) return;
+            mediaItems = mediaItems.filter(p => p.id !== id);
+            await deleteMediaFromDB(id);
+            updateBadgesCount();
+            renderGallery();
+            closeLightbox();
+            showToast("File media telah dihapus dari galeri.");
+        }
+
+        function deleteCurrentMedia() {
+            if (activeMediaId) {
+                deleteMedia(activeMediaId);
+            }
+        }
+
+        function editCurrentMedia() {
+            if (activeMediaId) {
+                prepareEditMedia(activeMediaId);
+            }
+        }
+
+        function filterMediaType(type) {
+            currentMediaType = type;
+            const buttons = document.querySelectorAll('.media-type-btn');
+            buttons.forEach(btn => {
+                btn.className = 'media-type-btn px-4 py-1.5 rounded-xl text-xs font-bold bg-white text-gray-600 border border-gray-200 hover:bg-omk-cream flex items-center space-x-1.5 transition-all';
+            });
+
+            if (type === 'all') {
+                document.getElementById('typeBtnAll').className = 'media-type-btn px-4 py-1.5 rounded-xl text-xs font-extrabold bg-omk-deep text-amber-300 shadow-sm flex items-center space-x-1.5 transition-all';
+            } else if (type === 'image') {
+                document.getElementById('typeBtnImage').className = 'media-type-btn px-4 py-1.5 rounded-xl text-xs font-extrabold bg-omk-deep text-amber-300 shadow-sm flex items-center space-x-1.5 transition-all';
+            } else if (type === 'video') {
+                document.getElementById('typeBtnVideo').className = 'media-type-btn px-4 py-1.5 rounded-xl text-xs font-extrabold bg-omk-deep text-amber-300 shadow-sm flex items-center space-x-1.5 transition-all';
+            }
+
+            renderGallery();
+        }
+
+        function filterCategory(category) {
+            currentFilterCategory = category;
+            const buttons = document.querySelectorAll('.cat-btn');
+            buttons.forEach(btn => {
+                if (btn.innerText.includes(category) || (category === 'Semua' && btn.innerText.includes('Semua'))) {
+                    btn.className = 'cat-btn active px-4 py-1.5 rounded-2xl text-xs font-bold transition-all shadow-sm whitespace-nowrap bg-omk-medium text-white';
+                } else {
+                    btn.className = 'cat-btn px-4 py-1.5 rounded-2xl text-xs font-semibold transition-all whitespace-nowrap bg-white text-gray-700 hover:bg-omk-light border border-gray-200';
+                }
+            });
+            renderGallery();
+        }
+
+        function handleSearch() {
+            searchQuery = document.getElementById('searchInput').value;
+            renderGallery();
+        }
+
+        function resetFilters() {
+            searchQuery = '';
+            document.getElementById('searchInput').value = '';
+            filterMediaType('all');
+            filterCategory('Semua');
+        }
+
+        function openLightbox(id) {
+            const item = mediaItems.find(p => p.id === id);
+            if (!item) return;
+
+            activeMediaId = id;
+            const container = document.getElementById('lightboxMediaContainer');
+            container.innerHTML = '';
+
+            const isVideo = item.type === 'video';
+
+            if (isVideo) {
+                const video = document.createElement('video');
+                video.src = item.mediaUrl;
+                video.controls = true;
+                video.autoplay = true;
+                video.className = "max-w-full max-h-full object-contain rounded-lg shadow-2xl";
+                container.appendChild(video);
+                document.getElementById('lightboxTypeTag').innerText = "Video Kegiatan OMK";
+            } else {
+                const img = document.createElement('img');
+                img.src = item.mediaUrl;
+                img.alt = item.title;
+                img.className = "max-w-full max-h-full object-contain rounded-lg";
+                container.appendChild(img);
+                document.getElementById('lightboxTypeTag').innerText = "Foto Dokumentasi OMK";
+            }
+
+            document.getElementById('lightboxTitle').innerText = item.title;
+            document.getElementById('lightboxCategory').innerText = item.category;
+            document.getElementById('lightboxDate').innerText = formatDate(item.date);
+            document.getElementById('lightboxDesc').innerText = item.description;
+
+            const adminActions = document.getElementById('lightboxAdminActions');
+            if (isAdmin) {
+                adminActions.classList.remove('hidden');
+                adminActions.classList.add('flex');
+            } else {
+                adminActions.classList.add('hidden');
+                adminActions.classList.remove('flex');
+            }
+
+            document.getElementById('lightboxModal').classList.remove('hidden');
+        }
+
+        function closeLightbox() {
+            const container = document.getElementById('lightboxMediaContainer');
+            const video = container.querySelector('video');
+            if (video) {
+                video.pause();
+            }
+            document.getElementById('lightboxModal').classList.add('hidden');
+            activeMediaId = null;
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            toastMsg.innerText = message;
+
+            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
